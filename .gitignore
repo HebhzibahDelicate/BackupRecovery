@@ -4,7 +4,32 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+# Generated backup files
+/backup/
+/logs/
 
+# Database exports and archives
+*.sql
+*.dump
+*.tar.gz
+
+# AWS credentials
+.aws/
+.env
+.env.*
+!.env.example
+
+# Self-hosted runner
+/actions-runner/
+
+# Java build files
+**/target/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
 ### STS ###
 .apt_generated
 .classpath
@@ -13,6 +38,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
+# GitHub self-hosted runner
+actions-runner/
 
 ### IntelliJ IDEA ###
 .idea

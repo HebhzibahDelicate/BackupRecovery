@@ -1,0 +1,35 @@
+
+# AWS credentials and secrets
+.aws/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Backup files
+backup/
+*.sql
+*.dump
+*.tar.gz
+
+# Logs
+logs/
+*.log
+
+# Java / Spring Boot
+target/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

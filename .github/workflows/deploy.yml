@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "BackupRecovery/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build application
+        run: mvn -B -f BackupRecovery/pom.xml clean package -DskipTests
+
+      - name: Install application
+        run: sudo install -o hebhzi -m 644 "$(ls BackupRecovery/target/*.jar | grep -v original | head -1)" /opt/hebhzi/app.jar
+
+      - name: Restart application
+        run: sudo systemctl restart hebhzi
+
+      - name: Check application health
+        run: |
+          for i in $(seq 1 30); do
+            curl -fs localhost:8080/actuator/health | grep -q UP && exit 0
+            sleep 2
+          done
+          echo "App did not become healthy"
+          exit 1
